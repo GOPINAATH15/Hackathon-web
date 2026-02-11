@@ -1,0 +1,223 @@
+/* =============================
+   ROOT THEME (UNCHANGED)
+============================= */
+:root {
+  --primary: #00f7ff;
+  --secondary: #38bdf8;
+  --accent: #6366f1;
+  --bg-dark: #0b0f1a;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* =============================
+   DOMAIN SECTION
+============================= */
+.domain-section {
+  padding: 140px 8%;
+  background: #0b0f1a;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* =============================
+   HEADER
+============================= */
+.domain-header h2 {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 900;
+  margin-bottom: 18px;
+  color: var(--primary);
+  letter-spacing: -0.03em;
+}
+
+.domain-header p {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 820px;
+  margin: 0 auto 70px;
+  line-height: 1.7;
+}
+
+/* =============================
+   DOMAIN CARD (ABOUT-BOX STYLE)
+============================= */
+.domain-problem {
+  max-width: 920px;
+  margin: 0 auto 80px;
+  padding: 44px;
+
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+
+  text-align: left;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+}
+
+.domain-problem:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 70px rgba(0, 247, 255, 0.25);
+}
+
+/* =============================
+   TITLE
+============================= */
+.domain-problem h3 {
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--primary);
+}
+
+/* =============================
+   DESCRIPTION
+============================= */
+.domain-problem p {
+  font-size: 16px;
+  line-height: 1.75;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+/* =============================
+   SUB HEADINGS
+============================= */
+.domain-problem h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 28px 0 14px;
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.domain-problem h4::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
+}
+
+/* =============================
+   FEATURE LIST
+============================= */
+.domain-problem ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.domain-problem li {
+  padding: 14px 16px 14px 42px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+  position: relative;
+}
+
+/* CHECK ICON */
+.domain-problem li::before {
+  content: "✔";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 14px;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+@media (max-width: 768px) {
+  .domain-section {
+    padding: 120px 6%;
+  }
+
+  .domain-problem {
+    padding: 28px;
+    margin-bottom: 50px;
+  }
+
+  .domain-problem h3 {
+    font-size: 22px;
+  }
+}
+/* =============================
+   ROW LAYOUT
+============================= */
+
+.domain-row {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;   /* IMPORTANT */
+  position: relative;
+}
+
+/* Keep original glass card */
+.domain-problem {
+  flex: 1;
+}
+
+/* =============================
+   OUTSIDE IMAGE
+============================= */
+
+.domain-side-image {
+  flex: 0.9;
+  position: sticky;
+  top: 120px;     /* controls how far from top */
+  align-self: flex-start;   /* VERY IMPORTANT */
+}
+
+.domain-side-image img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+}
+
+/* Hover Premium Effect */
+.domain-side-image img:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.9),
+    0 0 70px rgba(0, 247, 255, 0.45);
+}
+
+/* Floating Glow Behind Image */
+.domain-side-image::before {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(circle, rgba(0, 247, 255, 0.15), transparent 70%);
+  filter: blur(40px);
+  z-index: -1;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media (max-width: 1024px) {
+  .domain-row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .domain-side-image {
+    width: 100%;
+  }
+}

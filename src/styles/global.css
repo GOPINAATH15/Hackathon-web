@@ -1,0 +1,498 @@
+/* =========================
+   GLOBAL RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #f4f9ff, #eef5ff);
+  color: #1f2a44;
+  line-height: 1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1rem 3rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(0, 110, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 90, 180, 0.15);
+}
+
+.nav-left {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0047ff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+}
+
+.nav-links li {
+  cursor: pointer;
+  font-weight: 500;
+  color: #1f2a44;
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: #005cff;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero {
+  padding: 6rem 2rem 5rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+
+  background: linear-gradient(90deg, #003cff, #4fc3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: #2c3e6e;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  color: #4a5c7a;
+}
+
+/* Event card */
+.event-card {
+  display: inline-block;
+  padding: 1.6rem 2.4rem;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(0, 110, 255, 0.15);
+  box-shadow: 0 20px 45px rgba(0, 90, 180, 0.25);
+}
+
+.event-card p {
+  font-size: 0.95rem;
+  margin: 0.3rem 0;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+.section {
+  max-width: 1100px;
+  margin: 5rem auto;
+  padding: 0 2rem;
+}
+
+.section h2 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+
+  background: linear-gradient(90deg, #003cff, #4fc3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section p {
+  font-size: 1.05rem;
+  color: #4a5c7a;
+  max-width: 800px;
+}
+
+/* =========================
+   GRID & CARDS
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  padding: 2rem;
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(0, 110, 255, 0.15);
+  box-shadow: 0 25px 55px rgba(0, 90, 180, 0.25);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #003cff;
+}
+
+.card ul {
+  list-style: none;
+}
+
+.card li {
+  margin-bottom: 0.5rem;
+  color: #4a5c7a;
+}
+
+/* =========================
+   REGISTER (PREMIUM)
+========================= */
+.register {
+  margin: 6rem auto;
+  padding: 4rem 3rem;
+  max-width: 950px;
+  text-align: center;
+  border-radius: 28px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(235, 245, 255, 0.85)
+  );
+
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 110, 255, 0.15);
+
+  box-shadow:
+    0 30px 60px rgba(0, 90, 180, 0.25),
+    inset 0 0 40px rgba(0, 110, 255, 0.05);
+
+  position: relative;
+  overflow: hidden;
+}
+
+.register h2 {
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+
+  background: linear-gradient(90deg, #003cff, #2f9bff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.register p {
+  font-size: 1.15rem;
+  max-width: 650px;
+  margin: 0 auto 2.6rem;
+  color: #1f2a44;
+}
+
+/* Register button */
+.register-btn {
+  padding: 16px 44px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #005cff, #4fc3ff);
+  color: white;
+
+  box-shadow:
+    0 18px 45px rgba(0, 92, 255, 0.45),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+
+  transition: all 0.35s ease;
+}
+
+.register-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow:
+    0 28px 65px rgba(0, 92, 255, 0.6),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.register-btn:active {
+  transform: scale(0.95);
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 6rem;
+  font-size: 0.95rem;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+
+  border-top: 1px solid rgba(0, 110, 255, 0.15);
+  color: #4a5c7a;
+}
+.about-points {
+  margin-top: 16px;
+  padding-left: 20px;
+}
+
+.about-points li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #0d51e5d6;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+/* =========================
+   PREMIUM FLOW SCHEDULE
+========================= */
+
+.schedule-strip {
+  max-width: 900px;
+  margin: 6rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #003cff;
+  margin-bottom: 4rem;
+}
+
+.schedule-row {
+  display: grid;
+  grid-template-columns: 100px 20px 1fr;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  padding: 1.6rem 0;
+  position: relative;
+}
+
+.schedule-row:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 110px;
+  top: 60px;
+  height: calc(100% - 30px);
+  width: 2px;
+  background: linear-gradient(to bottom, #005cff, transparent);
+}
+
+/* Time */
+.schedule-row .time {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #005cff;
+}
+
+/* Dot */
+.schedule-row .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #005cff, #6ad1ff);
+  margin-top: 6px;
+  box-shadow: 0 0 0 6px rgba(0, 92, 255, 0.12);
+}
+
+/* Text */
+.schedule-row .details h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0a1f44;
+}
+
+.schedule-row .details p {
+  font-size: 0.95rem;
+  color: #5b6f92;
+  margin-top: 4px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .schedule-row {
+    grid-template-columns: 80px 18px 1fr;
+  }
+}
+/* =========================
+   IDEA & CODE SUBMISSION
+========================= */
+.submission-flow {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.submission-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.step-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1d4ed8; /* premium blue */
+  line-height: 1;
+}
+
+.submission-step p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #334155;
+  max-width: 720px;
+}
+
+.submission-step b {
+  color: #0f172a;
+}
+/* =========================
+   FAQ – PREMIUM ACCORDION
+========================= */
+.faq-wrapper {
+  margin-top: 2.5rem;
+  max-width: 800px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1.2rem 0;
+  background: none;
+  border: none;
+  outline: none;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.faq-question:hover {
+  color: #1d4ed8;
+}
+
+.faq-icon {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #1d4ed8;
+  transition: transform 0.3s ease;
+}
+
+.faq-icon.open {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.faq-answer.show {
+  max-height: 200px;
+}
+
+.faq-answer p {
+  padding-bottom: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #475569;
+}
+/* =========================
+   REGISTRATION SECTION
+========================= */
+.register-section {
+  margin: 5rem auto;
+  text-align: center;
+  max-width: 720px;
+}
+
+.register-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.register-desc {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.register-cta {
+  margin-top: 2rem;
+  padding: 0.75rem 2.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.register-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.4);
+}
+
+.register-cta:active {
+  transform: translateY(0);
+}
+.nav-links li {
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.nav-links li:hover {
+  color: #2563eb;
+}
