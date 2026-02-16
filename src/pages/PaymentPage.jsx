@@ -6,8 +6,8 @@ import "../styles/payment.css";
 export default function PaymentPage() {
   const navigate = useNavigate();
 
-  // ⚠️ IMPORTANT: Make sure this is your LATEST deployed Web App URL
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzv2IGTVMyONWLAYTms2gWv9b04JQsAhkL-AuKHwJ8WfKVouxZgtMm5Bs6zPyghacZs/exec";
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzv2IGTVMyONWLAYTms2gWv9b04JQsAhkL-AuKHwJ8WfKVouxZgtMm5Bs6zPyghacZs/exec";
 
   const [formData, setFormData] = useState(null);
   const [transactionId, setTransactionId] = useState("");
@@ -22,7 +22,7 @@ export default function PaymentPage() {
     setTimeout(() => {
       setToastMsg("");
       setToastType("");
-    }, 3500);
+    }, 2500);
   };
 
   useEffect(() => {
@@ -39,10 +39,12 @@ export default function PaymentPage() {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
+
       reader.onload = () => {
         const base64Data = reader.result.split(",")[1];
         resolve(base64Data);
       };
+
       reader.onerror = (error) => reject(error);
     });
   };
@@ -54,10 +56,12 @@ export default function PaymentPage() {
       showToast("❌ Transaction ID is required", "error");
       return;
     }
-    if (transactionId.length < 10) { // Adjusted to allow flexible length if needed
-      showToast("❌ Invalid Transaction ID", "error");
-      return;
-    }
+
+    // if (transactionId.length !== 12) {
+    //   showToast("❌ Transaction ID must be exactly 12 characters", "error");
+    //   return;
+    // }
+
     if (!screenshot) {
       showToast("❌ Please upload screenshot", "error");
       return;
@@ -72,9 +76,6 @@ export default function PaymentPage() {
       const sendData = new FormData();
       sendData.append("action", "finalSubmit");
 
-      // --- EXPLICITLY APPEND FIELDS (SAFER THAN LOOP) ---
-      
-      // Team & Leader
       sendData.append("teamName", formData.teamName);
       sendData.append("institutionName", formData.institutionName);
       sendData.append("institutionType", formData.institutionType);
@@ -88,30 +89,24 @@ export default function PaymentPage() {
       sendData.append("leaderMobile", formData.leaderMobile);
       sendData.append("leaderEmail", formData.leaderEmail);
 
-      // Member 2
       sendData.append("member2Name", formData.member2Name);
       sendData.append("member2Gender", formData.member2Gender);
       sendData.append("member2Mobile", formData.member2Mobile);
       sendData.append("member2Email", formData.member2Email);
 
-      // Member 3
       sendData.append("member3Name", formData.member3Name);
       sendData.append("member3Gender", formData.member3Gender);
       sendData.append("member3Mobile", formData.member3Mobile);
       sendData.append("member3Email", formData.member3Email);
 
-      // Member 4 (Handle Logic Here)
-      // We send it if it exists, or send empty string if it doesn't
       sendData.append("member4Name", formData.member4Name || "");
       sendData.append("member4Gender", formData.member4Gender || "");
       sendData.append("member4Mobile", formData.member4Mobile || "");
       sendData.append("member4Email", formData.member4Email || "");
 
-      // Domain
       sendData.append("domain", formData.domain);
       sendData.append("problemStatement", formData.problemStatement);
 
-      // Payment
       sendData.append("transactionId", transactionId);
       sendData.append("screenshot", base64Image);
       sendData.append("fileType", fileType);
@@ -126,8 +121,9 @@ export default function PaymentPage() {
       if (result.status === "success") {
         showToast("✅ Payment Submitted Successfully!", "success");
         localStorage.removeItem("hackathonFormData");
+
         setTimeout(() => {
-          navigate("/"); // Or navigate to a success page
+          navigate("/");
         }, 2000);
       } else {
         showToast("❌ " + result.message, "error");
@@ -144,13 +140,14 @@ export default function PaymentPage() {
 
   return (
     <div className="payment-wrapper">
+      {/* ✅ SMALL CENTER TOAST */}
       <AnimatePresence>
         {toastMsg && (
           <motion.div
             className={`toast ${toastType}`}
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
             transition={{ duration: 0.3 }}
           >
             {toastMsg}
@@ -172,15 +169,16 @@ export default function PaymentPage() {
           <p><b>IFSC Code:</b> SBIN0001234</p>
           <p><b>Bank Name:</b> STATE BANK OF INDIA</p>
           <p><b>Branch:</b> CHENNAI</p>
-          
-          <div style={{ display: 'flex', justifyContent: 'center', margin: "15px 0" }}>
+
+          <div className="qr-box">
             <img
               src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=HACKATHON_PAYMENT"
               alt="QR Code"
-              style={{ borderRadius: "10px", border: "2px solid #333" }}
+              className="qr-img"
             />
           </div>
-          <p style={{ textAlign: "center", fontSize: "0.9rem", color: "#ccc" }}>Scan to Pay</p>
+
+          <p className="scan-text">Scan to Pay</p>
         </div>
 
         <div className="team-box">
@@ -196,11 +194,18 @@ export default function PaymentPage() {
               type="text"
               value={transactionId}
               onChange={(e) => {
-                const val = e.target.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+                const val = e.target.value
+                  .replace(/[^A-Za-z0-9]/g, "")
+                  .toUpperCase();
+                // .slice(0, 12);
+
                 setTransactionId(val);
               }}
               placeholder="Enter Transaction ID"
             />
+            <small className="hint-text">
+              Only A-Z and 0-9 allowed (12 characters)
+            </small>
           </div>
 
           <div className="form-group">
