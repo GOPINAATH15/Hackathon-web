@@ -104,11 +104,15 @@ export default function Navbar() {
       transition={{ duration: 0.7 }}
     >
       <Link to="/" className="kg-logo-wrapper">
-        <img
+      
+         <img
           src="/Kg-logo.png"
           alt="College Logo"
           className="kg-college-logo"
         />
+
+     
+       
       </Link>
 
       <div

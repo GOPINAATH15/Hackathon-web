@@ -1,14 +1,44 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-// import "../styles/components.css";
+import { useEffect, useRef, useState } from "react";
 import "../styles/RegisterSection.css";
 import Phase from "./Phase";
 
 export default function RegisterSection() {
-  const navigate = useNavigate();   
+  const navigate = useNavigate();
+
+  const sectionRef = useRef(null);
+  const boxRef = useRef(null);
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !boxRef.current) return;
+
+      const sectionTop = sectionRef.current.offsetTop;
+      const sectionHeight = sectionRef.current.offsetHeight;
+      const boxHeight = boxRef.current.offsetHeight;
+      const scrollY = window.scrollY;
+
+      const navbarOffset = 100; // adjust based on navbar height
+
+      if (
+        scrollY > sectionTop - navbarOffset &&
+        scrollY < sectionTop + sectionHeight - boxHeight - navbarOffset
+      ) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.section
+      ref={sectionRef}
       className="register"
       id="register"
       initial={{ opacity: 0, y: 40 }}
@@ -29,7 +59,8 @@ export default function RegisterSection() {
 
         {/* RIGHT SIDE - RULES & REGULATIONS */}
         <motion.div
-          className="register-box"
+          ref={boxRef}
+          className={`register-box ${isFixed ? "fixed-box" : ""}`}
           initial={{ scale: 0.95 }}
           whileInView={{ scale: 1 }}
           transition={{ duration: 0.5 }}

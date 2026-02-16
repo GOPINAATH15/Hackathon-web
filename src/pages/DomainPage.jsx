@@ -12,15 +12,15 @@ export default function DomainPage() {
 
   const domains = [
     { name: "Artificial Intelligence & Machine Learning", image: aiImg },
-    { name: "Web & App Development", image: healthImg },
-    { name: "Cyber Security", image: sustainableImg },
-    { name: "IoT & Embedded Systems", image: womensafetyImg },
+    { name: "HealthCare & Wellness", image: healthImg },
+    { name: "Sustainable Development & Environment", image: sustainableImg },
+    { name: "Women Safety & Empowerment", image: womensafetyImg },
     // { name: "Data Science & Analytics", image: dataImg }
   ];
 
   return (
     <section className="domain-page">
-      
+
       <motion.h1
         className="domain-heading"
         initial={{ opacity: 0, y: 30 }}

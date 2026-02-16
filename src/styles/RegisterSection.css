@@ -28,7 +28,7 @@
   max-width: 1300px;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 80px;
+  gap: 40px;
   align-items: flex-start;
   z-index: 2;
 }
