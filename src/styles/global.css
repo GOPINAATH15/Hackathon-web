@@ -1,6 +1,7 @@
 /* =========================
    GLOBAL RESET & BASE
 ========================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -488,11 +489,11 @@ body {
 .register-cta:active {
   transform: translateY(0);
 }
-.nav-links li {
+.nav-links li { 
   cursor: pointer;
   transition: color 0.25s ease;
 }
 
 .nav-links li:hover {
   color: #2563eb;
-}
+} 

@@ -1,4 +1,4 @@
-import "../styles/components.css";
+import "../styles/Navbar.css";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
@@ -6,6 +6,7 @@ import { useState, useRef } from "react";
 export default function Navbar() {
   const [domainOpen, setDomainOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimer = useRef(null);
 
   const domains = [
@@ -97,86 +98,127 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="navbar"
+      className="kg-navbar"
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7 }}
     >
-      {/* ✅ COLLEGE LOGO (LEFT SIDE) */}
-      <Link to="/" className="logo-wrapper">
+      <Link to="/" className="kg-logo-wrapper">
         <img
-          src="..\src\assets\kg-logo.png"   // 👉 place logo.png inside public folder
+          src="/Kg-logo.png"
           alt="College Logo"
-          className="college-logo"
+          className="kg-college-logo"
         />
       </Link>
 
-      <Link to="/">Home</Link>
-      <Link to="/about">About</Link>
-      <Link to="/schedule">Schedule</Link>
-      <Link to="/rules">Rules</Link>
-
-      {/* DOMAIN MULTI-LEVEL DROPDOWN */}
       <div
-        className="nav-dropdown"
-        onMouseEnter={() => {
-          clearTimeout(closeTimer.current);
-          setDomainOpen(true);
-        }}
-
-        onMouseLeave={() => {
-          closeTimer.current = setTimeout(() => {
-            setDomainOpen(false);
-            setActiveIndex(null);
-          }, 100); // 👈 delay (ms)
-        }}
-
+        className={`kg-hamburger ${mobileOpen ? "open" : ""}`}
+        onClick={() => setMobileOpen(!mobileOpen)}
       >
-        <span className="nav-link">
-          Domain <span className="caret" onMouseOver={() => domainOpen(true)}>▾</span>
-        </span>
-
-        {domainOpen && (
-          <div className="dropdown-menu">
-            {domains.map((item, index) => (
-              <div
-                key={index}
-                className="dropdown-item"
-                onMouseEnter={() => setActiveIndex(index)}
-              >
-                <span className="dropdown-title">
-                  {item.title}
-                  <span className="arrow">›</span>
-                </span>
-
-                {activeIndex === index && (
-                  <div className="sub-dropdown">
-                    {item.sub.map((subItem, i) => (
-                      <Link
-                        key={i}
-                        to={subItem.path}
-                        className="sub-item"
-                        onClick={() => {
-                          setDomainOpen(false);
-                          setActiveIndex(null);
-                        }}
-                      >
-                        {subItem.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
-      <Link to="/faq">FAQ</Link>
+      <div className={`kg-nav-links ${mobileOpen ? "active" : ""}`}>
+        <Link to="/" onClick={() => setMobileOpen(false)}>Home</Link>
+        <Link to="/about" onClick={() => setMobileOpen(false)}>About</Link>
+        <Link to="/phases" onClick={() => setMobileOpen(false)}>Phases</Link>
+        <Link to="/schedule" onClick={() => setMobileOpen(false)}>Schedule</Link>
+        <Link to="/rules" onClick={() => setMobileOpen(false)}>Rules</Link>
 
-      <Link to="/register" className="rregister">
-        Register
-      </Link>
+        <div
+          className="kg-nav-dropdown"
+          onMouseEnter={() => {
+            if (window.innerWidth > 768) {
+              clearTimeout(closeTimer.current);
+              setDomainOpen(true);
+            }
+          }}
+          onMouseLeave={() => {
+            if (window.innerWidth > 768) {
+              closeTimer.current = setTimeout(() => {
+                setDomainOpen(false);
+                setActiveIndex(null);
+              }, 100);
+            }
+          }}
+        >
+          <span
+            className="kg-nav-link"
+            onClick={() => {
+              if (window.innerWidth <= 768) {
+                setDomainOpen(!domainOpen);
+              }
+            }}
+          >
+            Domain <span className="kg-caret">▾</span>
+          </span>
+
+          {domainOpen && (
+            <div className={`kg-dropdown-menu ${window.innerWidth <= 768 ? "kg-mobile-dropdown" : ""}`}>
+              {domains.map((item, index) => (
+                <div
+                  key={index}
+                  className="kg-dropdown-item"
+                  onMouseEnter={() =>
+                    window.innerWidth > 768 && setActiveIndex(index)
+                  }
+                >
+                  <div
+                    className="kg-dropdown-title"
+                    onClick={() => {
+                      if (window.innerWidth <= 768) {
+                        setActiveIndex(activeIndex === index ? null : index);
+                      }
+                    }}
+                  >
+                    {item.title}
+                    <span className="kg-arrow">›</span>
+                  </div>
+
+                  {(activeIndex === index ||
+                    window.innerWidth <= 768) &&
+                    activeIndex === index && (
+                      <div className={`kg-sub-dropdown ${window.innerWidth <= 768 ? "kg-mobile-sub" : ""}`}>
+
+                        {/* 🔥 NEW HEADING (NO LOGIC CHANGED) */}
+                        <div className="kg-problem-heading">
+                          Problem Statement
+                        </div>
+
+                        {item.sub.map((subItem, i) => (
+                          <Link
+                            key={i}
+                            to={subItem.path}
+                            className="kg-sub-item"
+                            onClick={() => {
+                              setDomainOpen(false);
+                              setActiveIndex(null);
+                              setMobileOpen(false);
+                            }}
+                          >
+                            {subItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <Link to="/faq" onClick={() => setMobileOpen(false)}>FAQ</Link>
+
+        <Link
+          to="/register"
+          className="kg-register"
+          onClick={() => setMobileOpen(false)}
+        >
+          Register
+        </Link>
+      </div>
     </motion.nav>
   );
 }

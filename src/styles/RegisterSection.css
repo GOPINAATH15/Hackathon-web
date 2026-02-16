@@ -1,0 +1,224 @@
+/* ============================= LUXURY REGISTER SECTION ============================= */
+.register {
+  padding: 160px 8% 100px;
+  background: linear-gradient(180deg, #0a0a0a, #111111);
+  display: flex;
+  flex-direction: column;   /* Important for bottom button */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gold ambient glow */
+.register::before {
+  content: "";
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+  top: -250px;
+  left: -200px;
+  filter: blur(120px);
+}
+
+/* ============================= GRID CONTAINER ============================= */
+.register-container {
+  width: 100%;
+  max-width: 1300px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+/* ============================= LEFT SIDE (PHASE) ============================= */
+.register-guidelines {
+  color: #d0d0d0;
+}
+
+.register-guidelines h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.register-guidelines h4 {
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #f5e6b3;
+  font-weight: 600;
+}
+
+.register-guidelines ul {
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+.register-guidelines li {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+/* ============================= RIGHT SIDE (RULES BOX) ============================= */
+.register-box {
+  width: 100%;
+  padding: 70px 60px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 26px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.85);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.register-box:hover {
+  transform: translateY(-8px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 45px 120px rgba(212, 175, 55, 0.2);
+}
+
+/* Gold highlight strip */
+.register-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  border-top-left-radius: 26px;
+  border-top-right-radius: 26px;
+}
+
+/* Heading inside rules */
+.register-box h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.register-box h4 {
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  color: #f5e6b3;
+  font-weight: 600;
+}
+
+.register-box ul {
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+.register-box li {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+/* ============================= BOTTOM REGISTER BUTTON ============================= */
+.register-bottom {
+  margin-top: 100px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+
+.register-bottom p {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  color: #d0d0d0;
+  margin-bottom: 30px;
+}
+
+.register-bottom button {
+  padding: 16px 60px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #d4af37, #f5e6b3);
+  color: #111111;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(212, 175, 55, 0.35);
+  transition: all 0.4s ease;
+}
+
+.register-bottom button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px rgba(212, 175, 55, 0.6);
+}
+
+/* ============================= RESPONSIVE ============================= */
+@media (max-width: 1024px) {
+  .register {
+    padding: 140px 6% 90px;
+  }
+
+  .register-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .register-bottom {
+    margin-top: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .register {
+    padding: 120px 20px 80px;
+  }
+
+  .register-box {
+    padding: 46px 30px;
+    border-radius: 22px;
+  }
+
+  .register-box h2 {
+    font-size: 2rem;
+  }
+
+  .register-bottom button {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register {
+    padding: 100px 16px 70px;
+  }
+
+  .register-box {
+    padding: 36px 22px;
+  }
+
+  .register-box h2 {
+    font-size: 1.7rem;
+  }
+
+  .register-bottom button {
+    font-size: 14px;
+    padding: 13px 0;
+  }
+}

@@ -1,113 +1,472 @@
 /* =========================
-   NAVBAR (CENTERED RECTANGLE)
+   NAVBAR 
 ========================= */
-.navbar {
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: #050816;
+}
+
+.kg-navbar {
   position: fixed;
-  top: 20px; /* slightly down from top */
-  left: 20%;
-  transform: translateX(-50%);
-  width: auto;
-  max-width: 900px; /* restrict width for premium look */
-  height: 64px;
-  padding: 0 40px;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 
   display: flex;
-  justify-content: center; /* center links */
   align-items: center;
-  gap: 50px;
+  gap: 16px;
 
-  background: rgba(95, 103, 122, 0.95); /* dark glassy navbar */
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 20px; /* rounded rectangle */
-  box-shadow: 0 15px 50px rgba(51, 42, 42, 0.7);
+  padding: 0 40px;
+  height: 60px;
+
+  width: 94%;
+  max-width: 900px;
+
+  background: linear-gradient(145deg,
+      rgba(15, 12, 6, 0.95),
+      rgba(5, 4, 2, 0.98));
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 60px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(212, 175, 55, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  left: 50%;
+  translate: -50% 0;
+  /* width: fit-content; */
   z-index: 1000;
 }
 
-/* LEFT: Logo (optional inside the rectangle) */
-.nav-left {
+/* ===================== */
+/* LOGO SECTION (LEFT)   */
+/* ===================== */
+
+.kg-navbar-left {
   display: flex;
   align-items: center;
+  margin-right: 12px;
 }
 
-.college-logo {
-  height: 44px;
+.kg-logo-wrapper::after {
+  display: none !important;
+}
+
+.kg-college-logo {
+  padding-top:10px;
+  max-height: 210px;
   width: auto;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+}
+.kg-logo-wrapper{
+  left: -46px;
 }
 
-.college-logo:hover {
+.kg-college-logo:hover {
   transform: scale(1.08);
-  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
 }
 
-/* RIGHT: Links */
-.nav-right {
+/* ===================== */
+/* NAV LINKS             */
+/* ===================== */
+
+.kg-navbar-right {
   display: flex;
-  gap: 36px;
-  justify-content: center; /* center links inside rectangle */
+  align-items: center;
+  gap: 34px;
 }
 
-.nav-right a {
+.kg-navbar a {
+  text-transform: uppercase;
   text-decoration: none;
-  font-weight: 600;
-  color: #cbd5e1;
-  position: relative;
-  padding: 6px 0;
   font-size: 15px;
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.75);
+
+  position: relative;
+  transition: all 0.4s ease;
 }
 
-.nav-right a::after {
+/* CENTERED UNDERLINE */
+.kg-navbar a:hover {
+  color: #f5d76e;
+  text-shadow:
+    0 0 6px rgba(212, 175, 55, 0.6),
+    0 0 14px rgba(212, 175, 55, 0.6),
+    0 0 28px rgba(245, 215, 110, 0.8);
+
+  transition: 0.35s ease;
+}
+
+/* Hover & Active */
+.kg-navbar a::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -6px;
+  left: 50%;
+  bottom: -10px;
   width: 0%;
-  height: 3px;
-  background: linear-gradient(to right, #6366f1, #38bdf8);
-  transition: width 0.35s ease;
+  height: 2px;
+
+  background: linear-gradient(90deg, #d4af37, #f5d76e);
+
+  transform: translateX(-50%);
+  transition: width 0.4s ease;
   border-radius: 4px;
 }
 
-.nav-right a:hover,
-.nav-right a:focus,
-.nav-right a.active {
-  color: #38bdf8;
-  transform: translateY(-2px);
-}
-
-.nav-right a:hover::after,
-.nav-right a:focus::after,
-.nav-right a.active::after {
-  width: 100%;
+.kg-navbar a:hover::after {
+  width: 80%;
 }
 
 /* REGISTER BUTTON */
-.nav-right a.register {
-  padding: 10px 24px;
+.kg-navbar a.register {
+  padding: 12px 30px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #6366f1, #38bdf8);
-  color: #ffffff;
+
+  background: linear-gradient(135deg, #d4af37, #f5d76e);
+  color: #111;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  box-shadow:
+    0 15px 40px rgba(212, 175, 55, 0.5),
+    0 0 30px rgba(212, 175, 55, 0.4);
+
+  transition: all 0.4s ease;
+}
+
+.kg-navbar a.register:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow:
+    0 25px 60px rgba(212, 175, 55, 0.7),
+    0 0 40px rgba(245, 215, 110, 0.6);
+}
+.kg-problem-heading {
+  color: #d4af37;
   font-weight: 700;
-  box-shadow: 0 12px 35px rgba(56, 189, 248, 0.45);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  font-size: 14px;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #d4af37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.nav-right a.register:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 50px rgba(56, 189, 248, 0.6);
+@media (max-width: 1024px) {
+  .kg-college-logo {
+    /* width: 92%; */
+    height: 55px;
+  }
+  .kg-logo-wrapper{
+    left: -20px;
+    height: 138px;
+  }
+  .kg-navbar a {
+    font-size: 14px;
+  }
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
-  .navbar {
-    width: 90%;
+  .kg-navbar {
+    transform: translateX(-50%);
+    width: 85%;
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .kg-college-logo {
+    height: 42px;
+  }
+
+  .kg-navbar-right {
+    gap: 14px;
+  }
+
+  .kg-navbar a {
+    font-size: 13px;
+  }
+
+  .kg-navbar a.register {
+    padding: 8px 16px;
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kg-navbar {
+    height: 45px;
+    width: 92%;
+  }
+
+  .kg-college-logo {
+    height: 36px;
+  }
+
+  .kg-navbar-right {
+    gap: 10px;
+  }
+
+  .kg-navbar a {
+    font-size: 12px;
+  }
+
+  .kg-navbar a.register {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+
+/* ================= MOBILE FIX ================= */
+
+.kg-hamburger {
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.kg-hamburger span {
+  width: 20px;
+  height: 2px;
+  background: white;
+  transition: 0.3s ease;
+}
+
+/* MOBILE NAV CONTAINER */
+.kg-nav-links {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /* space between text and arrow */
+  cursor: pointer;
+}
+
+.kg-caret {
+  font-size: 15px;
+  opacity: 1.0;
+}
+
+/* MOBILE STYLE */
+@media (max-width: 768px) {
+
+  .kg-navbar {
+    width: 85%;
+    justify-content: space-between;
+  }
+
+  .kg-hamburger {
+    display: flex;
+  }
+
+  .kg-nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.98);
+    padding: 25px 0;
+    gap: 18px;
+
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+
+    transform: translateY(-150%);
+    transition: 0.4s ease;
+  }
+
+  .kg-nav-links.active {
+    transform: translateY(0);
+  }
+
+  .kg-nav-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  .kg-dropdown-menu {
+    position: relative;
+    box-shadow: none;
+  }
+
+}
+
+/* MOBILE DOMAIN FIX */
+.kg-mobile-dropdown {
+  position: relative;
+  width: 100%;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.kg-mobile-dropdown .dropdown-item {
+  width: 100%;
+  text-align: center;
+}
+
+.kg-mobile-sub {
+  position: relative;
+  left: 0;
+  background: rgba(255, 255, 255, 0.05);
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px 0;
+}
+
+
+/* ===================== */
+/* DOMAIN DROPDOWN       */
+/* ===================== */
+
+.kg-nav-dropdown {
+  position: relative;
+}
+
+.kg-nav-link {
+  cursor: pointer;
+}
+
+/* LEVEL 1 */
+.kg-dropdown-menu {
+  position: absolute;
+  top: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: rgba(8, 8, 8, 0.9);
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  padding: 12px;
+
+  min-width: 280px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 999;
+}
+
+.kg-dropdown-item {
+  position: relative;
+  padding: 10px 14px;
+  color: #cbd5e1;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.kg-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.kg-dropdown-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kg-arrow {
+  font-size: 14px;
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
+/* LEVEL 2 */
+.kg-sub-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
+
+  margin-left: 10px;
+  min-width: 240px;
+
+  background: rgba(8, 8, 8, 0.95);
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  padding: 12px;
+
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kg-sub-item {
+  display: block;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #cbd5e1;
+  border-radius: 8px;
+}
+
+.kg-sub-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #38bdf8;
+}
+
+/* ===================== */
+/* MOBILE                */
+/* ===================== */
+
+@media (max-width: 768px) {
+  .kg-navbar {
+    width: 85%;
+    padding: 0 18px;
     gap: 20px;
   }
 
-  .nav-right {
-    display: none;
+  .kg-college-logo {
+    height: 130px;
+  }
+}
+
+/* ===================== */
+/* MOBILE DROPDOWN FIX  */
+/* ===================== */
+
+@media (max-width: 768px) {
+
+  /* Main dropdown becomes full width */
+  .kg-dropdown-menu {
+    position: static;
+    /* remove absolute */
+    transform: none;
+    width: 100%;
+    margin-top: 10px;
+    min-width: 100%;
+    border-radius: 12px;
+  }
+
+  /* Stack items vertically */
+  .kg-dropdown-item {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  /* Remove side popup behavior */
+  .kg-sub-dropdown {
+    position: static;
+    /* no side positioning */
+    margin-left: 0;
+    margin-top: 8px;
+    width: 100%;
+    min-width: 100%;
+    border-radius: 10px;
+  }
+
+  /* Sub items full width */
+  .kg-sub-item {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  /* Arrow adjustment */
+  .kg-arrow {
+    font-size: 12px;
   }
 }

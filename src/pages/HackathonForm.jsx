@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import "../styles/form.css";
 
 export default function HackathonForm() {
-  const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbytFzeLz2hfNQZiIM2cMtJDdVArsa7iQRHmSoULnX6dWhiJ18zY6e4fEqSCPpZ2F0WS/exec";
+  const navigate = useNavigate();
 
   const states = [
-    "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh",
-    "Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand",
-    "Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur",
-    "Meghalaya","Mizoram","Nagaland","Odisha","Punjab",
-    "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura",
-    "Uttar Pradesh","Uttarakhand","West Bengal"
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+    "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+    "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+    "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+    "Uttar Pradesh", "Uttarakhand", "West Bengal"
   ];
 
   const institutionTypes = ["Engineering College", "Arts & Science College", "University"];
@@ -95,12 +95,16 @@ export default function HackathonForm() {
     member3Mobile: "",
     member3Email: "",
 
+    member4Name: "",
+    member4Gender: "",
+    member4Mobile: "",
+    member4Email: "",
+
     domain: "",
     problemStatement: ""
   });
 
-  const [memberCount, setMemberCount] = useState(1);
-
+  const [memberCount, setMemberCount] = useState(3);
   const [loading, setLoading] = useState(false);
   const [toastMsg, setToastMsg] = useState("");
   const [toastType, setToastType] = useState("");
@@ -112,12 +116,22 @@ export default function HackathonForm() {
     setTimeout(() => {
       setToastMsg("");
       setToastType("");
-    }, 3500);
+    }, 2500);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const upperFields = ["teamName", "institutionName", "institutionCity"];
+
+    // ✅ ALL NAME FIELDS CAPS
+    const upperFields = [
+      "teamName",
+      "institutionName",
+      "institutionCity",
+      "leaderName",
+      "member2Name",
+      "member3Name",
+      "member4Name"
+    ];
 
     if (name === "domain") {
       setFormData((prev) => ({
@@ -134,46 +148,73 @@ export default function HackathonForm() {
     }));
   };
 
- const validateForm = () => {
-  // ✅ Team Details Required
-  if (!formData.teamName.trim()) return "Please enter Team Name";
-  if (!formData.institutionName.trim()) return "Please enter Institution Name";
-  if (!formData.institutionType.trim()) return "Please select Institution Type";
-  if (!formData.institutionCity.trim()) return "Please enter Institution City";
-  if (!formData.institutionState.trim()) return "Please select Institution State";
+  const validateMobileRange = (mobile) => {
+    if (mobile.length !== 10) return false;
+    const num = Number(mobile);
+    return num >= 5555555555 && num <= 9999999999;
+  };
 
-  // ✅ Leader Required
-  if (!formData.leaderName.trim()) return "Please enter Leader Name";
-  if (!formData.leaderGender.trim()) return "Please select Leader Gender";
-  if (!formData.leaderCourse.trim()) return "Please select Leader Course";
-  if (!formData.leaderYear.trim()) return "Please select Leader Year";
-  if (!formData.leaderMobile.trim()) return "Please enter Leader Mobile";
-  if (!formData.leaderEmail.trim()) return "Please enter Leader Email";
+  const validateForm = () => {
+    if (!formData.teamName.trim()) return "Please enter Team Name";
+    if (!formData.institutionName.trim()) return "Please enter Institution Name";
+    if (!formData.institutionType.trim()) return "Please select Institution Type";
+    if (!formData.institutionCity.trim()) return "Please enter Institution City";
+    if (!formData.institutionState.trim()) return "Please select Institution State";
 
-  // ✅ Member 2 Required
-  if (!formData.member2Name.trim()) return "Please enter Member 2 Name";
-  if (!formData.member2Gender.trim()) return "Please select Member 2 Gender";
-  if (!formData.member2Mobile.trim()) return "Please enter Member 2 Mobile";
-  if (!formData.member2Email.trim()) return "Please enter Member 2 Email";
+    if (!formData.leaderName.trim()) return "Please enter Leader Name";
+    if (!formData.leaderGender.trim()) return "Please select Leader Gender";
+    if (!formData.leaderCourse.trim()) return "Please select Leader Course";
+    if (!formData.leaderYear.trim()) return "Please select Leader Year";
+    if (!formData.leaderMobile.trim()) return "Please enter Leader Mobile";
+    if (!formData.leaderEmail.trim()) return "Please enter Leader Email";
 
-  // ✅ Member 3 Required
-  if (!formData.member3Name.trim()) return "Please enter Member 3 Name";
-  if (!formData.member3Gender.trim()) return "Please select Member 3 Gender";
-  if (!formData.member3Mobile.trim()) return "Please enter Member 3 Mobile";
-  if (!formData.member3Email.trim()) return "Please enter Member 3 Email";
+    if (!formData.member2Name.trim()) return "Please enter Member 2 Name";
+    if (!formData.member2Gender.trim()) return "Please select Member 2 Gender";
+    if (!formData.member2Mobile.trim()) return "Please enter Member 2 Mobile";
+    if (!formData.member2Email.trim()) return "Please enter Member 2 Email";
 
-  // ✅ Domain Required
-  if (!formData.domain.trim()) return "Please select Domain";
-  if (!formData.problemStatement.trim()) return "Please select Problem Statement";
+    if (!formData.member3Name.trim()) return "Please enter Member 3 Name";
+    if (!formData.member3Gender.trim()) return "Please select Member 3 Gender";
+    if (!formData.member3Mobile.trim()) return "Please enter Member 3 Mobile";
+    if (!formData.member3Email.trim()) return "Please enter Member 3 Email";
 
-  // ✅ Mobile Validation
-  if (formData.leaderMobile.length !== 10) return "Leader mobile must be 10 digits";
-  if (formData.member2Mobile.length !== 10) return "Member 2 mobile must be 10 digits";
-  if (formData.member3Mobile.length !== 10) return "Member 3 mobile must be 10 digits";
+    if (memberCount === 4) {
+      if (!formData.member4Name.trim()) return "Please enter Member 4 Name";
+      if (!formData.member4Gender.trim()) return "Please select Member 4 Gender";
+      if (!formData.member4Mobile.trim()) return "Please enter Member 4 Mobile";
+      if (!formData.member4Email.trim()) return "Please enter Member 4 Email";
+    }
 
-  return null;
-};
+    if (!formData.domain.trim()) return "Please select Domain";
+    if (!formData.problemStatement.trim()) return "Please select Problem Statement";
 
+    // ✅ MOBILE NUMBER CHECKS
+    if (!validateMobileRange(formData.leaderMobile))
+      return "Leader mobile must be between 5555555555 and 9999999999";
+
+    if (!validateMobileRange(formData.member2Mobile))
+      return "Member 2 mobile must be between 5555555555 and 9999999999";
+
+    if (!validateMobileRange(formData.member3Mobile))
+      return "Member 3 mobile must be between 5555555555 and 9999999999";
+
+    if (memberCount === 4 && !validateMobileRange(formData.member4Mobile))
+      return "Member 4 mobile must be between 5555555555 and 9999999999";
+
+    // Female Mandatory Rule
+    const genders = [
+      formData.leaderGender,
+      formData.member2Gender,
+      formData.member3Gender,
+      memberCount === 4 ? formData.member4Gender : ""
+    ];
+
+    if (!genders.includes("Female")) {
+      return "At least one Female member is mandatory in each team";
+    }
+
+    return null;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -186,103 +227,46 @@ export default function HackathonForm() {
 
     setLoading(true);
 
-    try {
-      const response = await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ ...formData, memberCount })
-      });
+    localStorage.setItem(
+      "hackathonFormData",
+      JSON.stringify({ ...formData, memberCount })
+    );
 
-      const result = await response.json();
+    showToast("✅ Registration Validated! Redirecting to Payment...", "success");
 
-      if (result.status === "success") {
-        showToast("✅ Registration successful! We will contact you via email.", "success");
-
-        setFormData({
-          teamName: "",
-          institutionName: "",
-          institutionType: "",
-          institutionCity: "",
-          institutionState: "",
-
-          leaderName: "",
-          leaderGender: "",
-          leaderCourse: "",
-          leaderYear: "",
-          leaderMobile: "",
-          leaderEmail: "",
-
-          member2Name: "",
-          member2Gender: "",
-          member2Mobile: "",
-          member2Email: "",
-
-          member3Name: "",
-          member3Gender: "",
-          member3Mobile: "",
-          member3Email: "",
-
-          domain: "",
-          problemStatement: ""
-        });
-
-        setMemberCount(1);
-      } else {
-        if (result.message?.toLowerCase().includes("duplicate")) {
-          showToast("❌ Team name not available. Please try a different name.", "error");
-        } else {
-          showToast("❌ " + result.message, "error");
-        }
-      }
-    } catch (err) {
-      showToast("❌ Server error. Please try again later.", "error");
-    }
+    setTimeout(() => {
+      navigate("/payment");
+    }, 1500);
 
     setLoading(false);
   };
 
   const addMember = () => {
-    if (memberCount >= 3) {
-      showToast("⚠ Maximum 3 members allowed (including leader).", "error");
+    if (memberCount >= 4) {
+      showToast("⚠ Maximum 4 members allowed.", "error");
       return;
     }
 
-    setMemberCount((prev) => prev + 1);
-    showToast("✅ Member added successfully.", "success");
+    setMemberCount(4);
+    showToast("✅ Member 4 added successfully.", "success");
   };
 
   const removeMember = () => {
-    if (memberCount <= 1) {
-      showToast("⚠ Team leader cannot be removed.", "error");
+    if (memberCount <= 3) {
+      showToast("⚠ Minimum 3 members required.", "error");
       return;
     }
 
-    if (memberCount === 3) {
-      setFormData((prev) => ({
-        ...prev,
-        member3Name: "",
-        member3Gender: "",
-        member3Mobile: "",
-        member3Email: ""
-      }));
-    }
+    setFormData((prev) => ({
+      ...prev,
+      member4Name: "",
+      member4Gender: "",
+      member4Mobile: "",
+      member4Email: ""
+    }));
 
-    if (memberCount === 2) {
-      setFormData((prev) => ({
-        ...prev,
-        member2Name: "",
-        member2Gender: "",
-        member2Mobile: "",
-        member2Email: "",
-
-        member3Name: "",
-        member3Gender: "",
-        member3Mobile: "",
-        member3Email: ""
-      }));
-    }
-
-    setMemberCount((prev) => prev - 1);
-    showToast("❌ Member removed successfully.", "success");
+    setMemberCount(3);
+    showToast("❌ Member 4 removed successfully.", "success");
   };
 
   const GenderRadio = ({ name, value, checked, onChange }) => {
@@ -304,14 +288,14 @@ export default function HackathonForm() {
       <div className="glow glow1"></div>
       <div className="glow glow2"></div>
 
-      {/* TOAST */}
+      {/* ✅ SMALL CENTER TOAST */}
       <AnimatePresence>
         {toastMsg && (
           <motion.div
             className={`toast ${toastType}`}
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
             transition={{ duration: 0.3 }}
           >
             {toastMsg}
@@ -325,7 +309,6 @@ export default function HackathonForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        {/* FORM */}
         <motion.div
           className="ultra-card"
           initial={{ opacity: 0, x: -50 }}
@@ -333,7 +316,7 @@ export default function HackathonForm() {
           transition={{ duration: 0.8 }}
         >
           <h1 className="ultra-title">Hackathon Registration</h1>
-          <p className="ultra-subtitle">Team Registration (Maximum 3 Members)</p>
+          <p className="ultra-subtitle">Team Registration (Minimum 3, Maximum 4 Members)</p>
 
           <form onSubmit={handleSubmit} className="ultra-form">
             <h2 className="ultra-section">Team Details</h2>
@@ -388,7 +371,6 @@ export default function HackathonForm() {
               </div>
             </div>
 
-            {/* TEAM LEADER */}
             <h2 className="ultra-section">Team Leader</h2>
 
             <div className="ultra-grid">
@@ -445,30 +427,130 @@ export default function HackathonForm() {
             <div className="ultra-grid">
               <div>
                 <label>Leader Mobile *</label>
-                <input name="leaderMobile" value={formData.leaderMobile} onChange={handleChange} />
+                <input
+                  name="leaderMobile"
+                  value={formData.leaderMobile}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setFormData((prev) => ({ ...prev, leaderMobile: val }));
+                  }}
+                />
               </div>
+
 
               <div>
                 <label>Leader Email *</label>
                 <input type="email" name="leaderEmail" value={formData.leaderEmail} onChange={handleChange} />
               </div>
             </div>
+            <a
+              href="https://chat.whatsapp.com/JxYLEvuPTpB1R5gyNuAn1f?mode=gi_c"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn"
+            >
+              💬 Only Leader Join WhatsApp Group
+            </a>
+            <h2 className="ultra-section">Member 2</h2>
 
-            {/* MEMBER 2 */}
+            <div className="ultra-grid">
+              <div>
+                <label>Member 2 Name *</label>
+                <input name="member2Name" value={formData.member2Name} onChange={handleChange} />
+              </div>
+
+              <div>
+                <label>Gender *</label>
+                <div className="ultra-radio">
+                  {["Male", "Female"].map((g) => (
+                    <GenderRadio
+                      key={g}
+                      name="member2Gender"
+                      value={g}
+                      checked={formData.member2Gender === g}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="ultra-grid">
+              <div>
+                <label>Member 2 Mobile *</label>
+                <input
+                  name="member2Mobile"
+                  value={formData.member2Mobile}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setFormData((prev) => ({ ...prev, member2Mobile: val }));
+                  }}
+                />
+              </div>
+
+              <div>
+                <label>Member 2 Email *</label>
+                <input type="email" name="member2Email" value={formData.member2Email} onChange={handleChange} />
+              </div>
+            </div>
+
+            <h2 className="ultra-section">Member 3</h2>
+
+            <div className="ultra-grid">
+              <div>
+                <label>Member 3 Name *</label>
+                <input name="member3Name" value={formData.member3Name} onChange={handleChange} />
+              </div>
+
+              <div>
+                <label>Gender *</label>
+                <div className="ultra-radio">
+                  {["Male", "Female"].map((g) => (
+                    <GenderRadio
+                      key={g}
+                      name="member3Gender"
+                      value={g}
+                      checked={formData.member3Gender === g}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="ultra-grid">
+              <div>
+                <label>Member 3 Mobile *</label>
+                <input
+                  name="member3Mobile"
+                  value={formData.member3Mobile}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setFormData((prev) => ({ ...prev, member3Mobile: val }));
+                  }}
+                />
+              </div>
+
+              <div>
+                <label>Member 3 Email *</label>
+                <input type="email" name="member3Email" value={formData.member3Email} onChange={handleChange} />
+              </div>
+            </div>
+
             <AnimatePresence>
-              {memberCount >= 2 && (
+              {memberCount === 4 && (
                 <motion.div
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 25 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <h2 className="ultra-section">Member 2</h2>
+                  <h2 className="ultra-section">Member 4</h2>
 
                   <div className="ultra-grid">
                     <div>
-                      <label>Member 2 Name *</label>
-                      <input name="member2Name" value={formData.member2Name} onChange={handleChange} />
+                      <label>Member 4 Name *</label>
+                      <input name="member4Name" value={formData.member4Name} onChange={handleChange} />
                     </div>
 
                     <div>
@@ -477,9 +559,9 @@ export default function HackathonForm() {
                         {["Male", "Female"].map((g) => (
                           <GenderRadio
                             key={g}
-                            name="member2Gender"
+                            name="member4Gender"
                             value={g}
-                            checked={formData.member2Gender === g}
+                            checked={formData.member4Gender === g}
                             onChange={handleChange}
                           />
                         ))}
@@ -489,70 +571,28 @@ export default function HackathonForm() {
 
                   <div className="ultra-grid">
                     <div>
-                      <label>Member 2 Mobile *</label>
-                      <input name="member2Mobile" value={formData.member2Mobile} onChange={handleChange} />
+                      <label>Member 4 Mobile *</label>
+                      <input
+                        name="member4Mobile"
+                        value={formData.member4Mobile}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                          setFormData((prev) => ({ ...prev, member4Mobile: val }));
+                        }}
+                      />
                     </div>
 
                     <div>
-                      <label>Member 2 Email *</label>
-                      <input type="email" name="member2Email" value={formData.member2Email} onChange={handleChange} />
+                      <label>Member 4 Email *</label>
+                      <input type="email" name="member4Email" value={formData.member4Email} onChange={handleChange} />
                     </div>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* MEMBER 3 */}
-            <AnimatePresence>
-              {memberCount >= 3 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 25 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 25 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <h2 className="ultra-section">Member 3</h2>
-
-                  <div className="ultra-grid">
-                    <div>
-                      <label>Member 3 Name *</label>
-                      <input name="member3Name" value={formData.member3Name} onChange={handleChange} />
-                    </div>
-
-                    <div>
-                      <label>Gender *</label>
-                      <div className="ultra-radio">
-                        {["Male", "Female"].map((g) => (
-                          <GenderRadio
-                            key={g}
-                            name="member3Gender"
-                            value={g}
-                            checked={formData.member3Gender === g}
-                            onChange={handleChange}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="ultra-grid">
-                    <div>
-                      <label>Member 3 Mobile *</label>
-                      <input name="member3Mobile" value={formData.member3Mobile} onChange={handleChange} />
-                    </div>
-
-                    <div>
-                      <label>Member 3 Email *</label>
-                      <input type="email" name="member3Email" value={formData.member3Email} onChange={handleChange} />
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* ADD / REMOVE MEMBER BUTTONS */}
             <div className="member-btn-row">
-              {memberCount < 3 && (
+              {memberCount < 4 && (
                 <motion.button
                   type="button"
                   whileHover={{ scale: 1.03 }}
@@ -560,11 +600,11 @@ export default function HackathonForm() {
                   className="member-btn add-btn"
                   onClick={addMember}
                 >
-                  ➕ Add Member ({memberCount}/3)
+                  ➕ Add Member 4 ({memberCount}/4)
                 </motion.button>
               )}
 
-              {memberCount > 1 && (
+              {memberCount === 4 && (
                 <motion.button
                   type="button"
                   whileHover={{ scale: 1.03 }}
@@ -572,12 +612,11 @@ export default function HackathonForm() {
                   className="member-btn remove-btn"
                   onClick={removeMember}
                 >
-                  ✖ Remove Member
+                  ✖ Remove Member 4
                 </motion.button>
               )}
             </div>
 
-            {/* DOMAIN */}
             <h2 className="ultra-section">Domain Selection</h2>
 
             <label>Select Domain *</label>
@@ -609,12 +648,11 @@ export default function HackathonForm() {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Submitting..." : "Submit Registration"}
+              {loading ? "Submitting..." : "Proceed to Payment"}
             </motion.button>
           </form>
         </motion.div>
 
-        {/* GUIDE */}
         <motion.div
           className="ultra-guide"
           initial={{ opacity: 0, x: 60 }}
@@ -625,23 +663,27 @@ export default function HackathonForm() {
 
           <div className="guide-card">
             <h3>👥 Team Rules</h3>
-            <p>Maximum <b>3 Members</b> (including leader).</p>
+            <p>Minimum <b>3 Members</b> and Maximum <b>4 Members</b>.</p>
+            <p>At least <b>1 Female</b> member is mandatory.</p>
           </div>
 
           <div className="guide-card">
             <h3>📌 Domain Selection</h3>
-            <p>Select the correct <b>Domain</b> and matching <b>Problem Statement</b>.</p>
+            <p>Select correct <b>Domain</b> and matching <b>Problem Statement</b>.</p>
           </div>
 
           <div className="guide-card">
             <h3>🪪 Verification</h3>
-            <p>Please bring your <b>College ID</b> on the event day.</p>
+            <p>Please bring your <b>College ID</b> on event day.</p>
           </div>
 
           <div className="guide-card">
             <h3>📅 Event Info</h3>
             <p>Reporting Time: <b>9:00 AM</b></p>
             <p>Hackathon Duration: <b>24 Hours</b></p>
+          </div>
+          <div className="female-warning-box">
+            ⚠ At least <b>1 Female Candidate</b> is Mandatory in Each Team
           </div>
         </motion.div>
       </motion.div>

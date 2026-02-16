@@ -1,0 +1,108 @@
+/* =============================
+   LUXURY PHASE SECTION
+============================= */
+
+.phase-section {
+  padding: 140px 8% 120px;
+  background: linear-gradient(180deg, #0a0a0a, #111111);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold ambient glow */
+.phase-section::before {
+  content: "";
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.07), transparent 70%);
+  top: -300px;
+  right: -200px;
+  filter: blur(120px);
+}
+
+.phase-container {
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* =============================
+   TITLE
+============================= */
+
+.phase-title {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 80px;
+
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =============================
+   PHASE CARD
+============================= */
+
+.phase-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 50px 60px;
+  margin-bottom: 50px;
+
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.8);
+  transition: all 0.4s ease;
+}
+
+.phase-card:hover {
+  transform: translateY(-8px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 45px 120px rgba(212, 175, 55, 0.2);
+}
+
+/* =============================
+   TEXT STYLING
+============================= */
+
+.phase-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #f5e6b3;
+  font-weight: 700;
+}
+
+.phase-card ul {
+  padding-left: 18px;
+  line-height: 1.9;
+  color: #d0d0d0;
+}
+
+.phase-card li {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 10px;
+}
+
+/* =============================
+   RESPONSIVE
+============================= */
+
+@media (max-width: 768px) {
+  .phase-card {
+    padding: 35px 28px;
+  }
+
+  .phase-title {
+    font-size: 2.2rem;
+  }
+
+  .phase-card h3 {
+    font-size: 1.4rem;
+  }
+}

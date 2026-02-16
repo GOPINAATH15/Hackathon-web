@@ -1,0 +1,177 @@
+.prize-section {
+  padding: 160px 8%;
+  background: #0a0a0a;
+  color: #f5f5f5;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Elegant subtle gold glow */
+.prize-section::before {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+  top: -200px;
+  right: -200px;
+  filter: blur(80px);
+}
+
+/* Header */
+
+.prize-header h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.prize-header p {
+  font-family: 'Orbitron', sans-serif;
+  color: #999;
+  font-size: 18px;
+  margin-bottom: 100px;
+}
+
+/* ============================= */
+/*        PODIUM LAYOUT          */
+/* ============================= */
+
+.luxury-podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  justify-items: center;
+  align-items: end;
+}
+
+/* Positioning */
+
+.first {
+  grid-column: 2;
+  grid-row: 1;
+  transform: scale(1.1);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.second {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.third {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.special {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* ============================= */
+/*            CARDS              */
+/* ============================= */
+
+.lux-card {
+  width: 320px;
+  padding: 60px 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  transition: 0.5s ease;
+  position: relative;
+}
+
+.lux-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px rgba(212, 175, 55, 0.2);
+}
+
+/* ============================= */
+/*             MEDAL             */
+/* ============================= */
+
+.medal {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.medal img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+}
+
+/* ============================= */
+/*          TYPOGRAPHY           */
+/* ============================= */
+
+.lux-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.lux-card h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 40px;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.lux-card span {
+  font-size: 14px;
+  color: #888;
+}
+
+/* ============================= */
+/*       SPOTLIGHT EFFECT        */
+/* ============================= */
+
+.spotlight {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  filter: blur(50px);
+  z-index: -1;
+}
+
+/* ============================= */
+/*          RESPONSIVE           */
+/* ============================= */
+
+@media (max-width: 950px) {
+  .luxury-podium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .first {
+    transform: scale(1);
+  }
+}

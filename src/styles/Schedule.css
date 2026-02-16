@@ -1,0 +1,213 @@
+/* =========================
+   LUXURY SCHEDULE SECTION
+========================= */
+
+#schedule {
+  padding: 140px 8%;
+  color: #f5f5f5;
+  position: relative;
+
+  background:
+    linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)),
+    url("../assets/schedule-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Subtle golden glow */
+#schedule::before {
+  content: "";
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+  top: -200px;
+  right: -200px;
+  filter: blur(120px);
+}
+
+/* =========================
+   HEADING
+========================= */
+
+#schedule h2 {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 90px;
+  letter-spacing: 1px;
+
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline {
+  position: relative;
+  max-width: 950px;
+  margin: auto;
+}
+
+/* Elegant Gold Center Line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom,
+      rgba(212, 175, 55, 0),
+      rgba(212, 175, 55, 0.6),
+      rgba(212, 175, 55, 0));
+}
+
+/* =========================
+   SCHEDULE ITEM (Luxury Card)
+========================= */
+
+.schedule-item {
+  position: relative;
+  width: 50%;
+  padding: 28px 32px;
+  margin-bottom: 70px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 18px;
+  backdrop-filter: blur(18px);
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  transition: all 0.4s ease;
+}
+
+.schedule-item:hover {
+  transform: translateY(-8px);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 30px 80px rgba(212, 175, 55, 0.15);
+}
+
+/* LEFT & RIGHT */
+.schedule-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.schedule-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* =========================
+   GOLD DOT
+========================= */
+
+.schedule-item::before {
+  content: "";
+  position: absolute;
+  top: 32px;
+  width: 14px;
+  height: 14px;
+  background: #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.25);
+}
+
+.schedule-item.left::before {
+  right: -7px;
+}
+
+.schedule-item.right::before {
+  left: -7px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.schedule-time {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d4af37;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.schedule-item h3 {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.schedule-icon {
+  font-size: 22px;
+  color: #d4af37;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+}
+
+/* =========================
+   DAY HEADER
+========================= */
+
+.day-header {
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  margin: 80px 0 40px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.day-header::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #d4af37, #f5e6b3);
+  margin: 14px auto 0;
+  border-radius: 2px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .timeline::before {
+    left: 14px;
+  }
+
+  .schedule-item {
+    width: 100%;
+    left: 0 !important;
+    text-align: left;
+    padding-left: 45px;
+  }
+
+  .schedule-item::before {
+    left: 6px;
+  }
+
+  #schedule h2 {
+    font-size: 2.2rem;
+  }
+}
